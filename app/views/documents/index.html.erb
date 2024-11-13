@@ -11,11 +11,27 @@
   </div>
 
   <div id="documents" class="min-w-full">
-    <% @documents.each do |document| %>
-      <%= render document %>
-      <p>
-        <%= link_to "Show this document", document, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
+    <table>
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @documents.each do |document| %>
+          <tr>
+            <td class="pt-1"><%= document.title %></td>
+            <td>
+              <%= link_to "Show", document, class: "ml-2 rounded-lg py-1 px-3 bg-gray-100 inline-block font-medium" %>
+              <%= link_to "Edit", edit_document_path(document), class: "mt-2 rounded-lg py-1 px-3 bg-gray-100 inline-block font-medium" %>
+              <div class="inline-block ml-2">
+                <%= button_to "Destroy", document, method: :delete, class: "mt-2 rounded-lg py-1 px-3 bg-gray-100 font-medium" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
