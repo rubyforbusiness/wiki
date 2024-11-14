@@ -3,7 +3,8 @@ class DocumentsController < ApplicationController
 
   # GET /documents or /documents.json
   def index
-    @documents = Document.all
+    @query = Document::Query.new(params.fetch(:query, {}).permit(:title_contains))
+    @documents = @query.results
   end
 
   # GET /documents/1 or /documents/1.json
@@ -67,4 +68,5 @@ class DocumentsController < ApplicationController
     def document_params
       params.expect(document: [ :title, :rich_text ])
     end
+
 end

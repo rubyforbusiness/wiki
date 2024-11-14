@@ -7,16 +7,25 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Documents</h1>
-    <%= link_to "New document", new_document_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to "New", new_document_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <div id="documents" class="min-w-full">
     <table>
       <thead>
-      <tr>
-        <th>Title</th>
-        <th>Actions</th>
-      </tr>
+        <tr>
+          <th>Title</th>
+          <th>Actions</th>
+        </tr>
+        <%= form_with model: @query, scope: :query, method: :get do |form| %>
+          <div>
+            <%= form.label :title_contains, "Title contains" %>
+            <%= form.search_field :title_contains %>
+            <%= submit_tag "Search", class: "ml-2 rounded-lg py-1 px-3 bg-gray-100 inline-block font-medium" %>
+            <%= link_to "Reset", documents_path, class: "ml-2 rounded-lg py-1 px-3 bg-gray-100 inline-block font-medium" %>
+          </div>
+
+        <% end %>
       </thead>
       <tbody>
         <% @documents.each do |document| %>
