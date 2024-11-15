@@ -3,8 +3,8 @@ class DocumentsController < ApplicationController
 
   # GET /documents or /documents.json
   def index
-    @query = Document::Query.new(params.fetch(:query, {}).permit(:title_contains))
-    @documents = @query.results
+    query = Document::Query.new(params.fetch(:query, {}).permit(:title_contains))
+    render Views::Documents::Index.new(documents: query.results, query: query)
   end
 
   # GET /documents/1 or /documents/1.json
