@@ -27,10 +27,16 @@ class Document::Query
   end
 
   def filter_by_title(scope)
-    if (title = title_contains.presence)
-      scope.where("title LIKE ?", "%#{title}%")
-    else
-      scope
+    if (title_query = title_contains.presence)
+      title_query.split(" ").each_with_index do |word, index|
+        new_relation = Document.where("title LIKE ?", "%" + Document.sanitize_sql_like(word) + "%")
+        if index == 0
+          scope = scope.and(new_relation)
+        else
+          scope = scope.or(new_relation)
+        end
+      end
     end
+    scope
   end
 end
