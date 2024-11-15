@@ -68,5 +68,4 @@ class DocumentsController < ApplicationController
     def document_params
       params.expect(document: [ :title, :rich_text ])
     end
-
 end

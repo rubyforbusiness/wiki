@@ -11,12 +11,12 @@ RSpec.describe Document do
       it "prevents duplicate titles" do
         create(:document, title: title)
         expect(subject.valid?).to eq(false)
-        expect(subject.errors.full_messages).to include( "Title has already been taken")
+        expect(subject.errors.full_messages).to include("Title has already been taken")
       end
 
 
       context "title is nil or empty" do
-        [nil, ""].each do |title|
+        [ nil, "" ].each do |title|
           let(:title) { title }
           it "has an error" do
             expect(subject.valid?).to eq(false)

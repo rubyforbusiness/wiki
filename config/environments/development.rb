@@ -71,5 +71,5 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
 
   config.hosts << "elite"
-  config.web_console.permissions = '192.168.0.201'
+  config.web_console.permissions = "192.168.0.201"
 end
